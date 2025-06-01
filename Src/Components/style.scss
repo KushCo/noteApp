@@ -1,0 +1,74 @@
+/*
+    #fec971
+    #fe9b72
+    #e4ef8f
+    #b693fd
+    #e4ef8f
+    #00d4fe
+*/
+body{
+    width: 100%;
+    height: 100vh;
+    background-color: #f7fcfe !important;
+    overflow: hidden;
+}
+#SideBar{
+    border-right: 2px solid #f2f3f4;
+    height: 100vh;
+}
+
+#SearchNav{
+    width: 30%;
+    input{
+        outline: none;
+    }
+}
+
+#ContentNav{
+    height: 80%;
+    overflow: scroll;
+    padding-bottom: 20px;
+}
+
+::-webkit-scrollbar{
+    width: 0;
+}
+
+#Notes{
+    background-color: #fec971;
+    // background-color: var(--note-color, #fec971);
+    width: 30%;
+    cursor: pointer;
+    .cardNoteDescription{
+        height: 200px;
+    }
+    h4{ 
+        font-size: 16px;
+    }
+    p{
+        font-size: 18px;
+    }
+    .cardNoteStar{
+        top: 25px;
+        right: 15px;
+        background-color: #151515;
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+        .fa-star{   
+            font-size: 16px;
+            color: #fece04;
+        }
+    }
+
+    .cardNoteEdit{
+        background-color: #151515;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        .fa-edit{   
+            font-size: 20px;
+            color: #fff;
+        }
+    }
+}
