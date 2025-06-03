@@ -35,9 +35,10 @@ body{
 }
 
 #Notes{
-    background-color: #fec971;
+    // background-color: #fec971;
     // background-color: var(--note-color, #fec971);
     width: 30%;
+    height: fit-content;
     cursor: pointer;
     .cardNoteDescription{
         height: 200px;
@@ -49,7 +50,7 @@ body{
         font-size: 18px;
     }
     .cardNoteStar{
-        top: 25px;
+        top: 20px;
         right: 15px;
         background-color: #151515;
         width: 35px;
