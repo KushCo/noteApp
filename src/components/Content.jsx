@@ -1,48 +1,40 @@
 import './style.css'
 
-import { useState, useEffect } from 'react';
+import supabase from "../supabaseClient";
+import { useState, useEffect } from "react";
 import Notes from './Notes';
-import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY)
-
-export default function Content(){
-
-    const [note, setNote] = useState([]);
+export default function Content(){    
+    const [ data, setData ] = useState([]);
 
     useEffect(() => {
-        getNotes();
-    }, []);
-
-    async function getNotes(){
-        const { data } = await supabase.from("notes").select();
-        
-        setNotes(data);
-
+        const supabaseConfig = async () => {
+            const { data, error } = await supabase.from('notes').select('*');
+            if(error){
+                console.error(`Something went wrong: ${error}`);
+            } else{
+                setData(data);
+            }
+        }
+        supabaseConfig();
+    }, []); 
+    const keydown = (event) => {
+        console.log(event.key)
     }
 
     return(
         <>
-            <ul>
-                {note.map((nt) => (
-                    <li>{nt.title}</li>
-                ))}
-            </ul>
             <div id="SearchNav" className="SearchNav d-flex align-items-center border px-2 py-2 rounded mt-3">
                 <i className='fa fa-search px-2'></i>
-                <input type="search" className="pt-1 px-2 border-0 w-100 bg-transparent" placeHolder="Search" autoFocus spellCheck='false' />
+                <input type="search" onKeyPress={keydown} className="pt-1 px-2 border-0 w-100 bg-transparent" placeholder="Search" autoFocus spellCheck='false' />
             </div>
             <div id="ContentNav" className="ContentNav w-100 mt-4 d-flex gap-3 flex-wrap">
-                <Notes />
-                <Notes />
-                <Notes />
-                <Notes />
-                <Notes />
-                <Notes />
-                <Notes />
-                <Notes />
-                <Notes />
-                <Notes />
+                {data.map((item) => (
+                    <Notes key={item.id}
+                    {...item}
+                    date={new Date(item.created_at).toLocaleString()}
+                    />    
+                ))}
             </div>
         </>
     );
